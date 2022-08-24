@@ -1,0 +1,61 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      semver-type:
+        required: false
+    branches:
+      - 'main'
+      - '[0-9]+.[1-9][0-9]*.x'
+
+defaults:
+  run:
+    shell: bash
+jobs:
+  prepare:
+    name: Prepare release run
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Check SemVer input
+      env:
+        SEMVER_TYPE: ${{ github.event.inputs.semver-type }}
+      run: |
+        if [[ ! -z "$SEMVER_TYPE" ]]; then
+          echo "SemVer Type is defined. Checking for valid SemVer type..."
+          if [[ "$SEMVER_TYPE" == "major" ]] || [[ "$SEMVER_TYPE" == "minor" ]] || [[ "$SEMVER_TYPE" == "patch" ]]; then
+            echo "::notice::SemVer Type is correctly set to $SEMVER_TYPE! Continuing with this version bump..."
+          else
+            echo "::error::ERROR: Enforced SemVer does not match any of [major,minor,patch]!"
+            echo "Exiting..."
+            exit 1
+          fi
+        else
+          echo "::notice::No SemVer type defined, continuing with auto generated version number..."
+        fi
+
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.BOT_SECRET }}
+
+    - name: Create release
+      id: release
+      uses: codfish/semantic-release-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.BOT_SECRET }}
+      with:
+        dry_run: true
+        repository_url: https://github.com/philipp-hinteregger/semantic-release-test.git
+        tag_format: '${version}'
+        branches: |
+        [
+          '[0-9]+.[1-9][0-9]*.x',
+          'main'
+        ]
+
+    - name: Output next version
+      env:
+        NEXT_VERSION: ${{ steps.release.outputs.release-version }}
+      run: |
+        echo $NEXT_VERSION
