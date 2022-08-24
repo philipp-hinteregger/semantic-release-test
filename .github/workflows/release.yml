@@ -39,6 +39,11 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.BOT_SECRET }}
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+
     - name: Create release
       id: release
       uses: codfish/semantic-release-action@v2
