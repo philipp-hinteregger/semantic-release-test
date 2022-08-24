@@ -39,11 +39,6 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.BOT_SECRET }}
 
-#    - name: Setup Node.js
-#      uses: actions/setup-node@v2
-#      with:
-#        node-version: 18
-
     - name: Create release
       id: get-next-version
       uses: codfish/semantic-release-action@v2
@@ -51,8 +46,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.BOT_SECRET }}
       with:
         dry_run: true
-        repository_url: https://github.com/philipp-hinteregger/semantic-release-test.git
-        tag_format: '${version}'
 
     # DO some stuff with the version here (e.g. for Helm-Charts etc.)
     - name: Output next version
@@ -68,5 +61,3 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.BOT_SECRET }}
       with:
         dry_run: false
-        repository_url: https://github.com/philipp-hinteregger/semantic-release-test.git
-        tag_format: '${version}'
