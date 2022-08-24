@@ -4,6 +4,11 @@ on:
     inputs:
       semver-type:
         required: false
+      prerelease:
+        description: 'Set to true if the a pre-release should be created'
+        type: boolean
+        required: false
+        default: false
     branches:
       - 'main'
       - '[0-9]+.[0-9]+.x'
@@ -46,6 +51,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.BOT_SECRET }}
       with:
         dry_run: true
+        prerelease: ${{ github.event.inputs.prerelease }}
 
     # DO some stuff with the version here (e.g. for Helm-Charts etc.)
     - name: Output next version
@@ -61,3 +67,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.BOT_SECRET }}
       with:
         dry_run: false
+        prerelease: ${{ github.event.inputs.prerelease }}

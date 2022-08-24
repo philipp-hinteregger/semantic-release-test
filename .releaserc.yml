@@ -1,8 +1,8 @@
 ---
 branches:
 - "[0-9]+.[0-9]+.x"
-- "main"
-prerelease: false
+- name: "main"
+  prerelease: "rc"
 repositoryUrl: https://github.com/philipp-hinteregger/semantic-release-test.git
 tagFormat: "${version}"
 plugins:
