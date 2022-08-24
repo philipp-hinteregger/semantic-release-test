@@ -1,6 +1,6 @@
 ---
 branches:
-- "[0-9]+.[0-9]+.x"
+- name: "[0-9]+.[0-9]+.x"
 - name: "main"
   prerelease: "rc"
 repositoryUrl: https://github.com/philipp-hinteregger/semantic-release-test.git
