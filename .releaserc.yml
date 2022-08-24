@@ -2,7 +2,7 @@
 branches:
 - "[0-9]+.[1-9][0-9]*.x"
 - "main"
-  prerelease: false
+prerelease: false
 repositoryUrl: https://github.com/philipp-hinteregger/semantic-release-test.git
 tagFormat: "${version}"
 plugins:
