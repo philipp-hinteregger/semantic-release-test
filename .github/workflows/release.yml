@@ -45,7 +45,7 @@ jobs:
 #        node-version: 18
 
     - name: Create release
-      id: release
+      id: get-next-version
       uses: codfish/semantic-release-action@v2
       env:
         GITHUB_TOKEN: ${{ secrets.BOT_SECRET }}
@@ -57,7 +57,7 @@ jobs:
     # DO some stuff with the version here (e.g. for Helm-Charts etc.)
     - name: Output next version
       env:
-        NEXT_VERSION: ${{ steps.release.outputs.release-version }}
+        NEXT_VERSION: ${{ steps.get-next-version.outputs.release-version }}
       run: |
         echo $NEXT_VERSION
 
