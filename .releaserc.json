@@ -7,6 +7,8 @@
         "prerelease": false
       }
     ],
+    "repositoryUrl": "https://github.com/philipp-hinteregger/semantic-release-test.git",
+    "tagFormat": "${version}",
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
