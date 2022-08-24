@@ -53,11 +53,6 @@ jobs:
         dry_run: true
         repository_url: https://github.com/philipp-hinteregger/semantic-release-test.git
         tag_format: '${version}'
-        branches: |
-          [
-            '[0-9]+.[1-9][0-9]*.x',
-            'main'
-          ]
 
     - name: Output next version
       env:
