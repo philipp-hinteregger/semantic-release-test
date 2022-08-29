@@ -1,7 +1,8 @@
 ---
 branches:
-- name: "[0-9]+.[0-9]+.x"
-- name: "main"
+- "[0-9]+.[0-9]+.x"
+- "main"
+- name: "beta"
   prerelease: "rc"
 repositoryUrl: https://github.com/philipp-hinteregger/semantic-release-test.git
 tagFormat: "${version}"
@@ -9,3 +10,26 @@ plugins:
 - "@semantic-release/commit-analyzer"
 - "@semantic-release/release-notes-generator"
 - "@semantic-release/github"
+types:
+- type: feat
+  section: Features
+- type: fix
+  section: Bug Fixes
+- type: chore
+  section: Other
+- type: docs
+  section: Docs
+- type: perf
+  section: Performance
+- type: build
+  hidden: true
+- type: ci
+  hidden: true
+- type: refactor
+  section: Refactoring
+- type: revert
+  hidden: true
+- type: style
+  hidden: true
+- type: test
+  hidden: true
